@@ -26,10 +26,10 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
 
     // Mapping from token ID to Certificate data
     mapping(uint256 => Certificate) public certificates;
-    
+
     // Mapping to track certificate verification status
     mapping(uint256 => bool) public verifiedCertificates;
-    
+
     // Events
     event CertificateCreated(uint256 tokenId, address recipient, string name, string certificationField);
     event CertificateVerified(uint256 tokenId, bool verificationStatus);
@@ -61,7 +61,7 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
     ) public onlyOwner returns (uint256) {
         uint256 tokenId = _nextTokenId;
         _nextTokenId++;
-        
+
         _safeMint(recipient, tokenId);
         _setTokenURI(tokenId, metadataURI);
 
@@ -73,11 +73,11 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
             issuerName: issuerName,
             isVerified: true
         });
-        
+
         verifiedCertificates[tokenId] = true;
-        
+
         emit CertificateCreated(tokenId, recipient, name, certificationField);
-        
+
         return tokenId;
     }
 
@@ -97,10 +97,10 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
      */
     function verifyCertificate(uint256 tokenId, bool status) public onlyOwner {
         require(_certificateExists(tokenId), "Certificate does not exist");
-        
+
         certificates[tokenId].isVerified = status;
         verifiedCertificates[tokenId] = status;
-        
+
         emit CertificateVerified(tokenId, status);
     }
 
@@ -111,10 +111,10 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
     function revokeCertificate(uint256 tokenId) public onlyOwner {
         require(_certificateExists(tokenId), "Certificate does not exist");
         require(verifiedCertificates[tokenId], "Certificate already revoked");
-        
+
         certificates[tokenId].isVerified = false;
         verifiedCertificates[tokenId] = false;
-        
+
         emit CertificateRevoked(tokenId);
     }
 
@@ -126,11 +126,11 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
     function getCertificatesByOwner(address owner) public view returns (uint256[] memory) {
         uint256 balance = balanceOf(owner);
         uint256[] memory tokenIds = new uint256[](balance);
-        
+
         for (uint256 i = 0; i < balance; i++) {
             tokenIds[i] = tokenOfOwnerByIndex(owner, i);
         }
-        
+
         return tokenIds;
     }
 
@@ -172,7 +172,7 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
     function withdraw() public onlyOwner {
         uint256 balance = address(this).balance;
         require(balance > 0, "No funds to withdraw");
-        (bool success, ) = payable(owner()).call{value: balance}("");
+        (bool success,) = payable(owner()).call{value: balance}("");
         require(success, "Transfer failed");
     }
 
@@ -186,19 +186,11 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
         return super._update(to, tokenId, auth);
     }
 
-    function _increaseBalance(address account, uint128 value)
-        internal
-        override(ERC721, ERC721Enumerable)
-    {
+    function _increaseBalance(address account, uint128 value) internal override(ERC721, ERC721Enumerable) {
         super._increaseBalance(account, value);
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
+    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return super.tokenURI(tokenId);
     }
 
