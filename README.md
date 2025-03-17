@@ -78,3 +78,156 @@ Before setting up this project, ensure you have the following installed:
 ```bash
 git clone https://github.com/rajeshchau/DEHIX-NFT.git
 cd DEHIX-NFT
+
+# DEHIX-NFT Installation and Configuration Guide
+
+## Install Smart Contract Dependencies
+
+Use Foundry to install external dependencies (such as OpenZeppelin contracts):
+
+```bash
+forge install OpenZeppelin/openzeppelin-contracts
+```
+
+## (Optional) Install Frontend Dependencies
+
+If your project includes a frontend (e.g., in a `frontend/` directory):
+
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+## Configuration
+
+### Foundry Configuration
+
+Ensure you have a `foundry.toml` file in the root directory with the following content:
+
+```toml
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+
+# Remappings allow Foundry to resolve import paths
+remappings = ["@openzeppelin/=lib/openzeppelin-contracts/"]
+
+optimizer = true
+optimizer_runs = 200
+evm_version = "london"
+
+[profile.release]
+optimizer = true
+optimizer_runs = 500
+evm_version = "london"
+```
+
+### Remappings
+
+Ensure you have a `remappings.txt` file in your project root with:
+
+```plaintext
+@openzeppelin/=lib/openzeppelin-contracts/
+```
+
+This configuration ensures that imports like `@openzeppelin/contracts/...` are correctly resolved.
+
+## Project Structure
+
+Below is an overview of the typical project structure:
+
+```bash
+DEHIX-NFT/
+├── contracts/           # Solidity smart contracts (e.g., DEHIX-NFT contract)
+├── script/              # Deployment scripts written in Solidity or JavaScript
+├── test/                # Solidity tests using Foundry's test framework
+├── frontend/            # (Optional) Frontend code for interacting with the dApp
+├── backend/             # (Optional) Backend services
+├── lib/                 # External libraries (e.g., OpenZeppelin contracts)
+├── remappings.txt       # Remapping file for Foundry
+├── foundry.toml         # Foundry configuration file
+└── README.md            # This documentation file
+```
+
+## Usage
+
+### Building the Smart Contracts
+
+To compile the smart contracts using Foundry, run:
+
+```bash
+forge build
+```
+
+This command compiles all Solidity files in your `contracts/` directory and outputs the artifacts to the `out/` directory.
+
+### Running Tests
+
+To run the tests, execute:
+
+```bash
+forge test
+```
+
+This command executes all tests found in the `test/` directory.
+
+### Code Formatting
+
+To format your Solidity files for consistent style, run:
+
+```bash
+forge fmt
+```
+
+### Running a Local Ethereum Node
+
+Foundry comes with **Anvil**, a local Ethereum node. Start it by running:
+
+```bash
+anvil
+```
+
+This command starts a local node on `http://127.0.0.1:8545` which you can use for development and testing.
+
+### Deploying Contracts
+
+Deploy your smart contracts to a network using a deployment script. For example, if you have a deployment script at `script/Deploy.s.sol`, run:
+
+```bash
+forge script script/Deploy.s.sol:Deploy --rpc-url <your_rpc_url> --private-key <your_private_key> --broadcast
+```
+
+Replace `<your_rpc_url>` with the RPC URL of your network (e.g., from Infura or Alchemy) and `<your_private_key>` with your private key.
+
+## Contributing
+
+Contributions are highly welcome! To contribute:
+
+- **Fork the Repository:** Click the "Fork" button on GitHub.
+- **Create a Branch:** Create a new branch for your feature or bug fix.
+- **Commit Changes:** Make your changes and commit them with clear messages.
+- **Push & Open PR:** Push your branch to your fork and open a pull request to the main repository.
+- **Review:** Collaborate with maintainers on any changes or improvements.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for full details.
+
+## Acknowledgements
+
+- **Foundry:** Foundry Book for providing an excellent Ethereum development toolkit.
+- **OpenZeppelin:** For offering secure, well-audited smart contract libraries.
+- **Ethereum Community:** For continuous support and a wealth of learning resources.
+
+## Additional Resources
+
+- [Official DEHIX Website](https://dehix.org/)
+- [DEHIX API Documentation](https://devapi.dehix.org/documentation/static/index.html)
+- [NFT Development Guides & Tutorials](https://medium.com/tag/nft)
+- [Foundry GitHub Repository](https://github.com/foundry-rs/foundry)
+
+---
+
+Happy Coding!
