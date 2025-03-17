@@ -1,6 +1,27 @@
+# foundry.toml
+
 [profile.default]
+# Directory where your Solidity contracts are located.
 src = "src"
+# Directory where the compiled artifacts will be stored.
 out = "out"
+# Libraries directory (e.g., OpenZeppelin contracts will be in "lib").
 libs = ["lib"]
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+# Remappings let Foundry resolve imports that use aliases.
+# This remapping tells Foundry to replace any "@openzeppelin/" import
+# with the local path "lib/openzeppelin-contracts/"
+remappings = ["@openzeppelin/=lib/openzeppelin-contracts/"]
+
+# Enable the Solidity optimizer and set the number of optimizer runs.
+optimizer = true
+optimizer_runs = 200
+
+# Specify the target EVM version. "london" is a common choice.
+evm_version = "london"
+
+# You can also define additional profiles (e.g., for testing or release)
+[profile.release]
+optimizer = true
+optimizer_runs = 500
+evm_version = "london"
