@@ -1,66 +1,80 @@
-## Foundry
+# DEHIX-NFT
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+DEHIX-NFT is a decentralized application (dApp) built on Ethereum that leverages blockchain technology to create, manage, and trade Non-Fungible Tokens (NFTs). This project is designed to issue NFT certificates, enabling secure, transparent, and decentralized validation of digital credentials.
 
-Foundry consists of:
+> **Disclaimer:** This project is provided for educational purposes only. Always perform thorough testing and security audits before deploying any smart contracts to a production environment.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+---
 
-## Documentation
+## Table of Contents
 
-https://book.getfoundry.sh/
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  - [Clone the Repository](#clone-the-repository)
+  - [Install Smart Contract Dependencies](#install-smart-contract-dependencies)
+  - [(Optional) Install Frontend Dependencies](#optional-install-frontend-dependencies)
+- [Configuration](#configuration)
+  - [Foundry Configuration](#foundry-configuration)
+  - [Remappings](#remappings)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+  - [Building the Smart Contracts](#building-the-smart-contracts)
+  - [Running Tests](#running-tests)
+  - [Code Formatting](#code-formatting)
+  - [Running a Local Ethereum Node](#running-a-local-ethereum-node)
+  - [Deploying Contracts](#deploying-contracts)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+- [Additional Resources](#additional-resources)
 
-## Usage
+---
 
-### Build
+## Overview
 
-```shell
-$ forge build
-```
+DEHIX-NFT is a robust NFT project that utilizes modern development tools such as [Foundry](https://book.getfoundry.sh/) for smart contract compilation, testing, and deployment, along with OpenZeppelin’s secure and battle-tested smart contract libraries. This project supports multiple sale phases (presale with whitelist verification and public sale) and integrates ERC2981 royalties to ensure creators receive a percentage of secondary sales.
 
-### Test
+---
 
-```shell
-$ forge test
-```
+## Features
 
-### Format
+- **NFT Certificate Minting:** Create NFTs with unique metadata representing certificates.
+- **Sale Phases:** Presale (whitelist-based) and public minting functionality.
+- **Royalties:** Integrated ERC2981 standard for automatic royalty distribution.
+- **Security:** Implements pausable functionality and reentrancy guard.
+- **Administration:** Owner-controlled configuration (mint price, supply cap, whitelist, etc.).
+- **Full Deployment & Testing:** Built using Foundry for rapid development and testing.
 
-```shell
-$ forge fmt
-```
+---
 
-### Gas Snapshots
+## Technologies Used
 
-```shell
-$ forge snapshot
-```
+- **Solidity:** Smart contract programming language.
+- **Foundry:** A fast, portable, and modular toolkit for Ethereum development.
+- **OpenZeppelin Contracts:** Secure, community-vetted smart contract libraries.
+- **Node.js:** (Optional) For any frontend or additional tooling.
+- **Rust:** (Optional) Required for installing Foundry.
 
-### Anvil
+---
 
-```shell
-$ anvil
-```
+## Prerequisites
 
-### Deploy
+Before setting up this project, ensure you have the following installed:
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+- **Rust:** [Install Rust](https://www.rust-lang.org/tools/install)
+- **Foundry:** [Foundry Installation Guide](https://book.getfoundry.sh/getting-started/installation.html)
+- **Node.js:** [Install Node.js](https://nodejs.org/) (if you plan on running or developing the frontend)
+- **Git:** [Install Git](https://git-scm.com/)
 
-### Cast
+---
 
-```shell
-$ cast <subcommand>
-```
+## Installation
 
-### Help
+### Clone the Repository
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+```bash
+git clone https://github.com/rajeshchau/DEHIX-NFT.git
+cd DEHIX-NFT
