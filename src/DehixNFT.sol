@@ -166,15 +166,7 @@ contract ProfessionalCertificateNFT is ERC721, ERC721URIStorage, ERC721Enumerabl
         return verifiedCertificates[tokenId];
     }
 
-    /**
-     * @dev Allows owner to withdraw any ETH sent to the contract
-     */
-    function withdraw() public onlyOwner {
-        uint256 balance = address(this).balance;
-        require(balance > 0, "No funds to withdraw");
-        (bool success,) = payable(owner()).call{value: balance}("");
-        require(success, "Transfer failed");
-    }
+   
 
     // The following functions are overrides required by Solidity
 
